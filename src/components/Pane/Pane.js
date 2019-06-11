@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Pane.css'
 
 import Thumb from '../Thumb';
 
-const Pane = ({ user,...props }) => (
-  <div>
+const Pane = ({ user, ...props }) => (
+  <div className="Pane">
     <Thumb src={user.avatar} alt={user.name} />
-    <p>{user.company.catchPhrase}</p>
+    <p className="Pane--description">{user.company.catchPhrase}</p>
   </div>
 );
 

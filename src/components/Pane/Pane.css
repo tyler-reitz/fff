@@ -1,0 +1,12 @@
+.Pane {
+  flex-basis: 30%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.Pane--description {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}

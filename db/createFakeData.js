@@ -6,7 +6,9 @@ const data = {
 }
 
 for (let i = 0; i < 40; i++) {
-  data.users.push(faker.helpers.contextualCard())
+  const user = faker.helpers.contextualCard();
+  user.id = faker.random.uuid();
+  data.users.push(user);
 }
 
 fs.writeFile(__dirname + "/db.json", JSON.stringify(data), () => console.log("data set generated"))
