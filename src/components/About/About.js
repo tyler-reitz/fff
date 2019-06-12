@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import './About.css';
+import React, { useState, useEffect } from 'react';
 
 import Pane from '../Pane';
 import Thumb from '../Thumb';
@@ -14,7 +14,7 @@ const About = ({ users: usersProps = [] }) => {
       fetchUsers('http://localhost:5000/users')
         .then(resp => {
           setUsers(resp);
-          setFeatured(resp.slice(0, 3));
+          setFeatured(resp.slice(0, 3).map(f => ({ ...f, key: Math.random() })));
         });
     }
   }, []);
@@ -24,22 +24,39 @@ const About = ({ users: usersProps = [] }) => {
 
     switch (featIdx) {
       case 0:
+        setFeatured([
+          { ...user, key: Math.random() },
+          featured[1],
+          featured[2]
+        ])
         break;
       case 1:
-        setFeatured([ featured[1], featured[0], featured[2] ]);
+        setFeatured([
+          { ...featured[1], key: Math.random() },
+          { ...featured[0], key: Math.random() },
+            featured[2]
+        ]);
         break;
       case 2:
-        setFeatured([ featured[2], featured[0], featured[1] ]);
+        setFeatured([
+          { ...featured[2], key: Math.random() },
+          { ...featured[0], key: Math.random() },
+          { ...featured[1], key: Math.random() },
+        ]);
         break;
       default:
-        setFeatured([ user, featured[0], featured[1] ]);
+        setFeatured([
+          { ...user, key: Math.random() },
+          { ...featured[0], key: Math.random() },
+          { ...featured[1], key: Math.random() },
+        ]);
     }
   };
 
   return (
     <div className="About">
-      {featured.map(feat => (
-        <Pane key={feat.id} user={feat} />
+      {featured.map((feat, idx) => (
+        <Pane key={feat.key} user={feat} idx={idx} />
       ))}
       {users.map(user => (
         <Thumb
